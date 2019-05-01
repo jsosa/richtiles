@@ -12,7 +12,7 @@ import numpy as np
 def get_tiles_by_extent(xmin, ymin, xmax, ymax, tilesdir):
 
     # Reading tiles filenames, assuming they are tif files
-    mylist = sorted(glob(tilesdir + '/*.tif'))
+    mylist = sorted(glob(tilesdir + '/*'))
 
     mylist_area = []
     for tile in mylist:
@@ -45,11 +45,13 @@ def write_tiles_layout(mylist, outfile):
         for y in reversed(range(min(ymins), max(ymins)+resy, resy)):
             for x in range(min(xmins), max(xmins)+resx, resx):
 
-                if return_code(x, y) in codes:
-                    fout.write(return_code(x, y)+',')
+                mycode = return_code(x, y)
+                if mycode in codes:
+                    idx = np.where(np.array(codes) == mycode)[0][0]
+                    fout.write(mylist[idx]+',')
                 else:
                     fout.write(' '*7+',')
-                    
+
             fout.write('\n')
 
 
