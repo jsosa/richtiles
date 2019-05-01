@@ -50,7 +50,7 @@ def write_tiles_layout(mylist, outfile):
                     idx = np.where(np.array(codes) == mycode)[0][0]
                     fout.write(mylist[idx]+',')
                 else:
-                    fout.write(' '*7+',')
+                    fout.write(' '*15+',')
 
             fout.write('\n')
 
